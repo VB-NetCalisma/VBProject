@@ -24,7 +24,7 @@ Public Class Repository(Of T As BaseEntity)
         If Filter IsNot Nothing Then
             query = query.Where(Filter) ' select * from User Where id >5 
         End If
-        If IncludeProperties.Length > 0 Then
+        If IncludeProperties IsNot Nothing Then
             For Each includeProperty In IncludeProperties ' "User.Orders.OrderDetails.Product.Category"
                 query = query.Include(includeProperty)
             Next

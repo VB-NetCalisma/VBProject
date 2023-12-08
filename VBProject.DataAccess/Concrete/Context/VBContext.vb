@@ -17,7 +17,7 @@ Partial Public Class VBContext
 
 
     Protected Overrides Sub OnConfiguring(ByVal optionsBuilder As DbContextOptionsBuilder)
-        optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3; Initial Catalog=ErpDB; Integrated Security=true; TrustServerCertificate=True")
+        optionsBuilder.UseSqlServer("Data Source=DESKTOP-R04PVQ3; Initial Catalog=VisualBasicDB; Integrated Security=true; TrustServerCertificate=True")
     End Sub
 End Class
 
