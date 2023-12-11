@@ -24,33 +24,32 @@ Public Class UnitOfWork
     Public ReadOnly Property CategoryRepository As ICategoryRepository Implements IUnitOfWork.CategoryRepository
 
     Public Function SaveChangeAsync() As Task(Of Integer) Implements IUnitOfWork.SaveChangeAsync
-        '    'For Each item In _context.ChangeTracker.Entries(Of BaseEntity)()
-        '    '    If item.State Is EntityState.Added Then
-        '    '        item.Entity.AddedTime = Date.Now
-        '    '        item.Entity.UpdatedTime = Date.Now
-        '    '        item.Entity.AddedUser = item.Entity.AddedUser
-        '    '        item.Entity.UpdatedUser = item.Entity.UpdatedUser
-        '    '        item.Entity.AddedIPV4Address = _contextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()
-        '    '        item.Entity.UpdatedIPV4Address = _contextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()
+        For Each item In _context.ChangeTracker.Entries(Of BaseEntity)()
+            If item.State = EntityState.Added Then
+                item.Entity.AddedTime = Date.Now
+                item.Entity.UpdatedTime = Date.Now
+                item.Entity.AddedUser = item.Entity.AddedUser
+                item.Entity.UpdatedUser = item.Entity.UpdatedUser
+                item.Entity.AddedIPV4Address = _contextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()
+                item.Entity.UpdatedIPV4Address = _contextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()
 
-        '    '        If item.Entity.IsActive Is Nothing Then
-        '    '            item.Entity.IsActive = True
-        '    '        End If
-        '    '    ElseIf item.State Is EntityState.Modified Then
-        '    '        item.Entity.UpdatedTime = Date.Now
-        '    '        item.Entity.UpdatedUser = item.Entity.UpdatedUser
-        '    '        item.Entity.UpdatedIPV4Address = _contextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()
-        '    '    End If
+                If item.Entity.IsActive Is Nothing Then
+                    item.Entity.IsActive = True
+                End If
 
-        '    '    'else if (item.State == EntityState.Deleted)
-        '    '    '{
+            ElseIf item.State = EntityState.Modified Then
+                item.Entity.UpdatedTime = Date.Now
+                item.Entity.UpdatedUser = item.Entity.UpdatedUser
+                item.Entity.UpdatedIPV4Address = _contextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()
 
-        '    '    '    item.Entity.IsActive = false;
-        '    '    '    item.State = EntityState.Modified;
+            ElseIf item.State = EntityState.Deleted Then
+                item.Entity.IsActive = False
+                item.State = EntityState.Modified
 
-        '    '    '}
+            End If
 
-        '    'Next
+        Next
+
 
         Return _context.SaveChangesAsync()
     End Function

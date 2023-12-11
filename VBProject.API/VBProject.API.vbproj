@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VBProject.Business\VBProject.Business.vbproj" />
+    <ProjectReference Include="..\VBProject.Core\VBProject.Core.vbproj" />
     <ProjectReference Include="..\VBProject.DataAccess\VBProject.DataAccess.vbproj" />
     <ProjectReference Include="..\VBProject.Entity\VBProject.Entity.vbproj" />
   </ItemGroup>
