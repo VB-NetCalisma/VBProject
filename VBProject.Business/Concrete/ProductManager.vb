@@ -26,7 +26,7 @@ Public Class ProductManager
     End Function
 
     Public Async Function RemoveAsync(ByVal Entity As Product) As Task Implements IGenericService(Of Product).RemoveAsync
-        Await _uow.ProductRepository.UpdateAsync(Entity)
+        Await _uow.ProductRepository.RemoveAsync(Entity)
         Await _uow.SaveChangeAsync()
     End Function
 
