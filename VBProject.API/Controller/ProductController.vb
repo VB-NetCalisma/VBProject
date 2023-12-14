@@ -49,7 +49,7 @@ Public Class ProductController
     End Function
 
     <HttpGet("/GetProducts")>
-    Public Async Function GetProducts() As Task(Of IActionResult)
+    Public Async Function GetProducts() As Task(Of List(Of ProductDTOResponse))
         Dim products = Await _productService.GetAllAsync(Function(x) True, {"Category"})
 
         Dim productDTOResponseList As New List(Of ProductDTOResponse)()
@@ -57,7 +57,8 @@ Public Class ProductController
             productDTOResponseList.Add(_mapper.Map(Of ProductDTOResponse)(product))
         Next
 
-        Return Ok(Result(Of List(Of ProductDTOResponse)).SuccessWithData(productDTOResponseList))
+        'Return Ok(Result(Of List(Of ProductDTOResponse)).SuccessWithData(productDTOResponseList))
+        Return productDTOResponseList
     End Function
 
     <HttpGet("/GetProduct/{productId}")>
