@@ -16,12 +16,15 @@ Public Class UnitOfWork
 
         CategoryRepository = New CategoryRepository(_context)
         ProductRepository = New ProductRepository(_context)
+        UserRepository = New UserRepository(_context)
 
     End Sub
 
     Public ReadOnly Property ProductRepository As IProductRepository Implements IUnitOfWork.ProductRepository
 
     Public ReadOnly Property CategoryRepository As ICategoryRepository Implements IUnitOfWork.CategoryRepository
+
+    Public ReadOnly Property UserRepository As IUserRepository Implements IUnitOfWork.UserRepository
 
     Public Function SaveChangeAsync() As Task(Of Integer) Implements IUnitOfWork.SaveChangeAsync
         For Each item In _context.ChangeTracker.Entries(Of BaseEntity)()

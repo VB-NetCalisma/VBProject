@@ -13,6 +13,7 @@ Partial Public Class VBContext
     Public Overridable Property Products As DbSet(Of Product)
 
     Public Overridable Property Categories As DbSet(Of Category)
+    Public Overridable Property Users As DbSet(Of User)
 
 
 

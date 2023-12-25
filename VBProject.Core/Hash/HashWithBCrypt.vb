@@ -1,10 +1,11 @@
 ﻿Public Class HashWithBCrypt
     Public Shared Function HashPassword(password As String)
-        BCrypt.Net.BCrypt.HashPassword(password)
+        password = BCrypt.Net.BCrypt.HashPassword(password)
         Return password
     End Function
     Public Shared Function VerifyPassword(userPassword As String, requestPassword As String)
-        Dim bool = BCrypt.Net.BCrypt.EnhancedVerify(userPassword, BCrypt.Net.BCrypt.HashPassword(requestPassword))
+
+        Dim bool = BCrypt.Net.BCrypt.Verify(requestPassword, userPassword)
         If bool Then
             Return 1
         Else

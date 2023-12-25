@@ -17,6 +17,7 @@ Public Class ProductController
     End Sub
 
     <HttpPost("/AddProduct")>
+    <ValidationFilter(GetType(ProductValidator))>
     Public Async Function AddProduct(productDTORequest As ProductDTORequest) As Task(Of IActionResult)
         Dim product As Product = _mapper.Map(Of Product)(productDTORequest)
 
@@ -28,6 +29,7 @@ Public Class ProductController
     End Function
 
     <HttpPost("/UpdateProduct")>
+    <ValidationFilter(GetType(ProductValidator))>
     Public Async Function UpdateProduct(productDTORequest As ProductDTORequest) As Task(Of IActionResult)
         Dim product = Await _productService.GetAsync(Function(x) x.Id = productDTORequest.Id)
         If product Is Nothing Then
